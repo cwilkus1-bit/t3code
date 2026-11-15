@@ -85,9 +85,20 @@ run_scenario() {
   xcrun simctl io "$UDID" recordVideo --codec=h264 --force "$run/video.mp4" > /dev/null 2>&1 &
   local video=$!
   sleep 2
-  SIMCTL_CHILD_JS_DELAY=$delay xcrun simctl launch "$UDID" "$APP_ID" > /dev/null
-  sleep 4
-  cp "$data/Documents/coords.txt" "$run/coords.txt" 2>/dev/null || echo "no coords" >> "$run/steps.txt"
+  # A cold simulator launch can stall; wait for the app's tap coordinates, relaunching once.
+  local attempt waited
+  for attempt in 1 2; do
+    SIMCTL_CHILD_JS_DELAY=$delay xcrun simctl launch --terminate-running-process "$UDID" "$APP_ID" > /dev/null
+    for waited in $(seq 1 30); do
+      grep -q '^page ' "$data/Documents/coords.txt" 2>/dev/null && break
+      sleep 1
+    done
+    grep -q '^page ' "$data/Documents/coords.txt" 2>/dev/null && break
+    echo "launch attempt $attempt: no coords after 30s" >> "$run/steps.txt"
+    rm -f "$data/Documents/"*
+  done
+  sleep 1
+  cp "$data/Documents/coords.txt" "$run/coords.txt" 2>/dev/null || { echo "no coords" >> "$run/steps.txt"; return 1; }
   shot 01-chats-launch
 
   # Control: switching tabs without opening a Settings page.
