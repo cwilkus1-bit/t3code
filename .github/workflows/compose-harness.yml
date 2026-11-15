@@ -1,0 +1,25 @@
+name: compose-harness
+
+on:
+  push:
+    branches: [compose-harness]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  harness:
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install AXe
+        run: brew install cameroncooke/axe/axe
+      - name: Run harness
+        run: bash harness/run.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compose-harness-out
+          path: out/
