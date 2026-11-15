@@ -74,6 +74,13 @@ run_scenario() {
     echo "shot $1" >> "$run/steps.txt"
   }
   tap_tab() { touch_at $(coord "$1") "tab $1"; }
+  burst() {
+    local i
+    for i in $(seq -w 1 "$2"); do
+      xcrun simctl io "$UDID" screenshot "$run/$1-$i.png" > /dev/null 2>&1
+    done
+    echo "burst $1 x$2" >> "$run/steps.txt"
+  }
 
   xcrun simctl io "$UDID" recordVideo --codec=h264 --force "$run/video.mp4" > /dev/null 2>&1 &
   local video=$!
@@ -91,7 +98,10 @@ run_scenario() {
   tap_tab settings; sleep 2; shot 04-settings
   touch_at $(coord page) "Environments"; sleep 2; shot 05-environments
   touch_at $(coord page) "Back"; sleep 2; shot 06-settings-after-back
-  tap_tab threads; sleep 0.4; shot 07a-chats-0.4s; sleep 2.5; shot 07b-chats-3s
+  # Screenshots from the moment the press is sent until well after JS commits.
+  burst 07-chats-burst 14 &
+  local shots=$!
+  tap_tab threads; wait "$shots"; sleep 2; shot 07z-chats-settled
   touch_at $(coord compose) "New chat"; sleep 1.5; shot 08-after-new-chat-tap
 
   # Does it recover with more tab switches?
@@ -104,7 +114,7 @@ run_scenario() {
   echo "$variant js$delay: new chat taps = $(grep -c 'NEW CHAT TAPPED' "$run/harness.log" 2>/dev/null) (expected 2)" | tee -a "$OUT/summary.txt"
 }
 
-for delay in 0.05 0.3; do
+for delay in ${JS_DELAYS:-0.05 1.5}; do
   run_scenario before "$delay"
   run_scenario after "$delay"
 done
