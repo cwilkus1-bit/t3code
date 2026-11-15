@@ -1,0 +1,22 @@
+name: swiftlint
+
+on:
+  push:
+    branches: [compose-harness]
+    paths: ["lint/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  swiftlint:
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: SwiftLint (apps/mobile/.swiftlint.yml, strict)
+        working-directory: lint
+        run: |
+          command -v swiftlint || brew install swiftlint
+          swiftlint version
+          swiftlint lint --config .swiftlint.yml --strict T3SidebarTabBarView.swift

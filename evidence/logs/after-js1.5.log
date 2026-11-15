@@ -1,0 +1,35 @@
+[  -0.000] harness start jsDelay=1.5 iOS 26.5
+[   0.367] footer unmounted
+[   0.446] mount #1 selectedTab=threads showsCompose=true host=(8.0, 746.0, 382.0 x 128.0)
+[   0.505] compose hidden=false frame=(317.0, 791.0, 62.0 x 62.0) onscreen=(317.0, 791.0, 62.0 x 62.0)
+[   1.962] tab threads center=(70.0, 822.0)
+[   1.963] tab pullRequests center=(134.66666666666669, 822.0)
+[   1.963] tab usage center=(199.33333333333334, 822.0)
+[   1.964] tab settings center=(264.0, 822.0)
+[  10.252] native onSelectionChange settings
+[  11.829] js commit tab=settings showsCompose=false host=(8.0, 746.0, 318.0 x 128.0)
+[  11.833] compose hidden=true frame=(317.0, 791.0, 62.0 x 62.0) onscreen=(317.0, 791.0, 62.0 x 62.0)
+[  16.251] native onSelectionChange threads
+[  17.855] js commit tab=threads showsCompose=true host=(8.0, 746.0, 382.0 x 128.0)
+[  17.866] compose hidden=false frame=(317.0, 791.0, 62.0 x 62.0) onscreen=(317.0, 791.0, 62.0 x 62.0)
+[  22.685] native onSelectionChange settings
+[  24.219] js commit tab=settings showsCompose=false host=(8.0, 746.0, 318.0 x 128.0)
+[  24.233] compose hidden=true frame=(317.0, 791.0, 62.0 x 62.0) onscreen=(317.0, 791.0, 62.0 x 62.0)
+[  28.384] push Settings > Environments
+[  28.386] unmount footer (page pushed)
+[  28.389] footer unmounted
+[  33.083] back to Settings
+[  33.112] mount #2 selectedTab=settings showsCompose=false host=(8.0, 746.0, 318.0 x 128.0)
+[  33.113] compose hidden=true frame=(8.0, 746.0, 0.0 x 0.0) onscreen=(8.0, 746.0, 0.0 x 0.0)
+[  37.884] native onSelectionChange threads
+[  39.457] js commit tab=threads showsCompose=true host=(8.0, 746.0, 382.0 x 128.0)
+[  39.467] compose hidden=false frame=(8.0, 746.0, 0.0 x 0.0) onscreen=(8.0, 746.0, 0.0 x 0.0)
+[  39.483] compose hidden=false frame=(317.0, 791.0, 62.0 x 62.0) onscreen=(317.0, 791.0, 62.0 x 62.0)
+[  55.134] NEW CHAT TAPPED count=1
+[  61.618] native onSelectionChange settings
+[  63.184] js commit tab=settings showsCompose=false host=(8.0, 746.0, 318.0 x 128.0)
+[  63.200] compose hidden=true frame=(317.0, 791.0, 62.0 x 62.0) onscreen=(317.0, 791.0, 62.0 x 62.0)
+[  67.118] native onSelectionChange threads
+[  68.702] js commit tab=threads showsCompose=true host=(8.0, 746.0, 382.0 x 128.0)
+[  68.703] compose hidden=false frame=(317.0, 791.0, 62.0 x 62.0) onscreen=(317.0, 791.0, 62.0 x 62.0)
+[  72.568] NEW CHAT TAPPED count=2

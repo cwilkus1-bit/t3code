@@ -1,0 +1,4 @@
+before js0.05: new chat taps = 2 (expected 2)
+after js0.05: new chat taps = 2 (expected 2)
+before js1.5: new chat taps = 1 (expected 2)
+after js1.5: new chat taps = 2 (expected 2)

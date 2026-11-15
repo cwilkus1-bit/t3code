@@ -3,6 +3,7 @@ name: compose-harness
 on:
   push:
     branches: [compose-harness]
+    paths: ["harness/**"]
   workflow_dispatch:
 
 permissions:
